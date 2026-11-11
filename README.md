@@ -7,7 +7,7 @@
   <a href="https://github.com/Danissemo/ForeverFlip">ForeverFlip</a> addon.</p>
 
   <a href="https://github.com/Danissemo/ForeverFlip-Data/actions/workflows/aggregate.yml"><img src="https://img.shields.io/github/actions/workflow/status/Danissemo/ForeverFlip-Data/aggregate.yml?label=aggregate" alt="Aggregate" /></a>
-  <a href="https://github.com/Danissemo/ForeverFlip-Data/releases"><img src="https://img.shields.io/github/v/release/Danissemo/ForeverFlip-Data?include_prereleases&label=latest%20archive&color=f5b52e" alt="Latest archive" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/data-CC0%201.0-f5b52e" alt="CC0 1.0" /></a>
 </div>
 
 ## 📦 What is here
@@ -67,6 +67,6 @@ the future or with implausible values are refused.
 
 ## 📄 License
 
-The data is published under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/): use it for
+The data is published under [CC0 1.0](LICENSE): use it for
 anything. World of Warcraft is a trademark of Blizzard Entertainment; this project is not affiliated
 with Blizzard.
