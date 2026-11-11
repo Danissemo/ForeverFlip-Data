@@ -1,13 +1,18 @@
 name: Aggregate scans
 
-# Archives the scans uploaded by the ForeverFlip Sync helper and refreshes the shared summaries.
+# Checks and archives the scans players upload with the ForeverFlip Sync helper (issues "Scan upload:"),
+# confirms them against each other and refreshes the shared summaries. The issue text is only read
+# by the Python script through the API, never put into a shell command.
 on:
+  issues:
+    types: [opened]
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: aggregate
@@ -15,6 +20,7 @@ concurrency:
 
 jobs:
   aggregate:
+    if: github.event_name != 'issues' || startsWith(github.event.issue.title, 'Scan upload:')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -31,7 +37,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Archive new scans and update the summaries
+      - name: Check, archive and confirm scans, update the summaries
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python tool/sync/aggregate.py --data data
@@ -41,10 +47,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add shared
+          git add shared registry
           if git diff --cached --quiet; then
             echo "Nothing new."
           else
-            git commit -m "Update shared summaries"
+            git commit -m "Update scans and shared summaries"
             git push
           fi
