@@ -1,0 +1,50 @@
+name: Aggregate scans
+
+# Archives the scans uploaded by the ForeverFlip Sync helper and refreshes the shared summaries.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggregate
+  cancel-in-progress: false
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: data
+
+      - uses: actions/checkout@v7
+        with:
+          repository: Danissemo/ForeverFlip
+          path: tool
+          sparse-checkout: sync
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Archive new scans and update the summaries
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tool/sync/aggregate.py --data data
+
+      - name: Commit the summaries
+        working-directory: data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add shared
+          if git diff --cached --quiet; then
+            echo "Nothing new."
+          else
+            git commit -m "Update shared summaries"
+            git push
+          fi
