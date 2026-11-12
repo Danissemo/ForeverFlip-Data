@@ -1,6 +1,7 @@
 name: Aggregate scans
 
-# Checks and archives the scans players upload with the ForeverFlip Sync helper (issues "Scan upload:"),
+# Checks and archives the scans players upload with the ForeverFlip Sync helper (issues "Scan upload:",
+# and anonymous uploads collected from the relay every 30 minutes),
 # confirms them against each other and refreshes the shared summaries. The issue text is only read
 # by the Python script through the API, never put into a shell command.
 on:
@@ -40,6 +41,10 @@ jobs:
       - name: Check, archive and confirm scans, update the summaries
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          # The upload relay for players without a GitHub account (relay/worker.js in the ForeverFlip
+          # repository). Without these two settings only GitHub uploads are processed.
+          RELAY_URL: ${{ vars.RELAY_URL }}
+          RELAY_KEY: ${{ secrets.RELAY_KEY }}
         run: python tool/sync/aggregate.py --data data
 
       - name: Commit the summaries
