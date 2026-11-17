@@ -1,20 +1,20 @@
 {
-  "checked_at": 1794936661,
+  "checked_at": 1794936695,
   "format": 1,
   "markets": {
     "CAMWOW EU4 Realm 3 PvE-Alliance": {
       "file": "CAMWOW-EU4-Realm-3-PvE-Alliance.txt",
-      "latest_published": 1794718922,
-      "latest_scan": 1794718922,
+      "latest_published": 1794934546,
+      "latest_scan": 1794934546,
       "product": "wowf",
       "published": 12,
-      "published_at": 1794936661,
+      "published_at": 1794936695,
       "reason": null,
       "recent": 12,
-      "registered": 34,
+      "registered": 41,
       "reliable": true,
       "statuses": {
-        "trusted": 34
+        "trusted": 41
       },
       "uploaders": 1
     }
