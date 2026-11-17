@@ -1,5 +1,5 @@
 {
-  "checked_at": 1794936695,
+  "checked_at": 1794941455,
   "format": 1,
   "markets": {
     "CAMWOW EU4 Realm 3 PvE-Alliance": {
@@ -8,13 +8,13 @@
       "latest_scan": 1794934546,
       "product": "wowf",
       "published": 12,
-      "published_at": 1794936695,
+      "published_at": 1794941455,
       "reason": null,
       "recent": 12,
-      "registered": 41,
+      "registered": 42,
       "reliable": true,
       "statuses": {
-        "trusted": 41
+        "trusted": 42
       },
       "uploaders": 1
     }
